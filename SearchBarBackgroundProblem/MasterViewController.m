@@ -11,6 +11,7 @@
 
 @interface MasterViewController ()
 
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property NSMutableArray *objects;
 @end
 
@@ -27,6 +28,18 @@
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
+
+    CGRect rect = CGRectMake(0, 0, 320, 44);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
+    CGContextSetFillColorWithColor(context, [[UIColor redColor] CGColor]);
+    CGContextFillRect(context, rect);
+
+    UIImage *backgroundImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    [self.searchBar setSearchFieldBackgroundImage:backgroundImage forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {
